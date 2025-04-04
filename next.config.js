@@ -4,8 +4,8 @@ const nextConfig = {
   images: {
     unoptimized: true,
   },
-  basePath: process.env.NODE_ENV === 'production' ? '/fhi-v4' : '',
-  assetPrefix: process.env.NODE_ENV === 'production' ? '/fhi-v4/' : '',
+  basePath: '/fhi-v4',
+  assetPrefix: '/fhi-v4/',
 }
 
 module.exports = nextConfig 
