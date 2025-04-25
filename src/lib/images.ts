@@ -1,11 +1,11 @@
-import { ref, getDownloadURL } from 'firebase/storage';
-import { storage } from './firebase';
+import { ref } from 'firebase/storage';
+import { storage, getStorageDownloadURL } from './firebase';
 
 export const getImageUrl = async (imageName: string, isGalleryImage: boolean = false): Promise<string> => {
   try {
     const imagePath = isGalleryImage ? `images/gallery/${imageName}` : `images/${imageName}`;
-    const imageRef = ref(storage, imagePath);
-    return await getDownloadURL(imageRef);
+    const apiUrl = `/api/storage?path=${encodeURIComponent(imagePath)}`;
+    return apiUrl;
   } catch (error: any) {
     console.error(`Error getting URL for ${imageName}:`, error.message);
     throw error;

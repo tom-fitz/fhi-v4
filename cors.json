@@ -1,0 +1,11 @@
+[
+  {
+    "origin": [
+      "https://tom-fitz.github.io",
+      "https://tom-fitz.github.io/fhi-v4",
+      "http://localhost:3000"
+    ],
+    "method": ["GET"],
+    "maxAgeSeconds": 3600
+  }
+] 
