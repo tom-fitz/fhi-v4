@@ -1,11 +1,8 @@
 [
   {
-    "origin": [
-      "https://tom-fitz.github.io",
-      "https://tom-fitz.github.io/fhi-v4",
-      "http://localhost:3000"
-    ],
-    "method": ["GET"],
-    "maxAgeSeconds": 3600
+    "origin": ["https://tom-fitz.github.io", "http://localhost:3000"],
+    "method": ["GET", "HEAD", "PUT", "POST", "DELETE"],
+    "maxAgeSeconds": 3600,
+    "responseHeader": ["Content-Type", "Access-Control-Allow-Origin"]
   }
 ] 
