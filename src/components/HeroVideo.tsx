@@ -2,38 +2,63 @@
 
 import Image from 'next/image'
 import { useEffect, useRef, useState } from 'react'
-import { logoImage, getImageUrl } from '@/lib/images'
+import { logoImage, heroVideoMp4, heroVideoM4a, getImageUrl, getVideoUrl } from '@/lib/images'
 
 const HeroVideo = () => {
   const videoRef = useRef<HTMLVideoElement>(null)
   const [showLogo, setShowLogo] = useState(false)
   const [logoUrl, setLogoUrl] = useState<string>('')
+  const [videoMp4Url, setVideoMp4Url] = useState<string>('')
+  const [videoM4aUrl, setVideoM4aUrl] = useState<string>('')
+  const [isLoading, setIsLoading] = useState(true)
 
   useEffect(() => {
-    if (videoRef.current) {
-      videoRef.current.play().catch(error => {
-        console.error('Error playing video:', error)
-      })
-    }
-    
-    // Load logo image
-    const loadLogo = async () => {
+    // Load media assets
+    const loadAssets = async () => {
+      setIsLoading(true);
       try {
-        const url = await getImageUrl(logoImage);
-        setLogoUrl(url);
+        const [logoUrlResult, videoMp4UrlResult, videoM4aUrlResult] = await Promise.all([
+          getImageUrl(logoImage),
+          getVideoUrl(heroVideoMp4),
+          getVideoUrl(heroVideoM4a)
+        ]);
+        
+        setLogoUrl(logoUrlResult);
+        setVideoMp4Url(videoMp4UrlResult);
+        setVideoM4aUrl(videoM4aUrlResult);
       } catch (error) {
-        console.error('Error loading logo:', error);
+        console.error('Error loading media assets:', error);
+      } finally {
+        setIsLoading(false);
       }
     };
     
-    loadLogo();
+    loadAssets();
 
     // Set timeout for logo fade-in
     const timer = setTimeout(() => {
       setShowLogo(true)
     }, 12000)
+    
     return () => clearTimeout(timer)
   }, [])
+
+  useEffect(() => {
+    if (videoRef.current && videoMp4Url) {
+      videoRef.current.load();
+      videoRef.current.play().catch(error => {
+        console.error('Error playing video:', error)
+      })
+    }
+  }, [videoMp4Url]);
+
+  if (isLoading) {
+    return (
+      <div className="relative h-screen w-full overflow-hidden bg-black flex items-center justify-center">
+        <div className="text-white">Loading...</div>
+      </div>
+    );
+  }
 
   return (
     <div className="relative h-screen w-full overflow-hidden">
@@ -57,8 +82,8 @@ const HeroVideo = () => {
             transform: 'translate(-50%, -50%)'
           }}
         >
-          <source src="/video/hero.f137.mp4" type="video/mp4" />
-          <source src="/video/hero.f140.m4a" type="audio/mp4" />
+          {videoMp4Url && <source src={videoMp4Url} type="video/mp4" />}
+          {videoM4aUrl && <source src={videoM4aUrl} type="audio/mp4" />}
           Your browser does not support the video tag.
         </video>
       </div>
