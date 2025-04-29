@@ -8,7 +8,7 @@ const TextSection = () => {
             Fitzgerald Home Interiors is a full-service interior design firm specializing in creating beautiful, functional spaces that reflect your unique style and personality. Based in the greater Boston area, we work with clients throughout New England to transform their homes into elegant, comfortable living spaces.
           </p>
           
-          <div className="grid md:grid-cols-2 gap-12 mt-16">
+          {/* <div className="grid md:grid-cols-2 gap-12 mt-16">
             <div>
               <h3 className="text-xl font-light mb-6">Our Services</h3>
               <ul className="list-none space-y-4">
@@ -52,7 +52,7 @@ const TextSection = () => {
                 </li>
               </ul>
             </div>
-          </div>
+          </div> */}
         </div>
       </div>
     </section>
