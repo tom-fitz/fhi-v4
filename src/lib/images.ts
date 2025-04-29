@@ -19,4 +19,4 @@ export const galleryImages = [
 ];
 
 // Other images are in the root images directory
-export const logoImage = 'logo_white.png'; 
+export const logoImage = 'logo_white.png';
