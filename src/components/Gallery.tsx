@@ -13,6 +13,8 @@ const GalleryComponent = () => {
   useEffect(() => {
     let mounted = true;
 
+    console.log("env var", process.env.NEXT_PUBLIC_FIREBASE_STORAGE_BUCKET)
+
     const loadImages = async () => {
       if (!mounted) return;
       setIsLoading(true);
