@@ -8,13 +8,9 @@ export const getImageUrl = async (imageName: string, isGalleryImage: boolean = f
     const imageRef = ref(storage, imagePath);
     return await getDownloadURL(imageRef);
   } catch (error: any) {
-    console.error(`Error getting URL for ${imageName}:`, error.message);
-    
-    // Fallback for GitHub Pages static deployment - construct URL directly if getDownloadURL fails
     const bucketName = "fhi-v4.firebasestorage.app";
     const encodedPath = encodeURIComponent(imagePath);
     const directUrl = `https://firebasestorage.googleapis.com/v0/b/${bucketName}/o/${encodedPath}?alt=media`;
-    console.log('Trying fallback URL:', directUrl);
     return directUrl;
   }
 };
