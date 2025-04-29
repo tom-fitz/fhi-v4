@@ -11,6 +11,12 @@ const nextConfig = {
         port: '',
         pathname: '/v0/b/**',
       },
+      {
+        protocol: 'https',
+        hostname: '*.firebasestorage.app',
+        port: '',
+        pathname: '/**',
+      },
     ],
   },
   ...(process.env.NODE_ENV === 'production' ? {
