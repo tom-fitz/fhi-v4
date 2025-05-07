@@ -1,6 +1,7 @@
 'use client'
 
 import { useState } from 'react'
+import { saveContactFormData } from '../lib/firebase'
 
 interface ContactFormProps {
   onSubmit: () => void
@@ -14,11 +15,35 @@ const ContactForm = ({ onSubmit, showThankYou }: ContactFormProps) => {
     phone: '',
     message: '',
   })
+  const [isSubmitting, setIsSubmitting] = useState(false)
+  const [error, setError] = useState<string | null>(null)
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
-    console.log('Form submitted:', formData)
-    onSubmit()
+    setIsSubmitting(true)
+    setError(null)
+    
+    try {
+      const result = await saveContactFormData({
+        name: formData.name,
+        email: formData.email,
+        message: formData.message,
+        phone: formData.phone
+      })
+      
+      if (result.success) {
+        console.log('Form submitted successfully')
+        onSubmit()
+      } else {
+        setError('Failed to submit the form. Please try again.')
+        console.error('Form submission error:', result.error)
+      }
+    } catch (err) {
+      setError('An unexpected error occurred. Please try again.')
+      console.error('Form submission exception:', err)
+    } finally {
+      setIsSubmitting(false)
+    }
   }
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
@@ -44,6 +69,11 @@ const ContactForm = ({ onSubmit, showThankYou }: ContactFormProps) => {
     <section className="py-20 px-4">
       <div className="max-w-2xl mx-auto">
         {/* <h2 className="text-3xl font-light text-center mb-12">Contact Us</h2> */}
+        {error && (
+          <div className="mb-6 p-4 bg-red-50 border border-red-200 text-red-600 rounded-md">
+            {error}
+          </div>
+        )}
         <form onSubmit={handleSubmit} className="space-y-6">
           <div className="grid md:grid-cols-2 gap-6">
             <div>
@@ -105,9 +135,10 @@ const ContactForm = ({ onSubmit, showThankYou }: ContactFormProps) => {
           <div>
             <button
               type="submit"
-              className="w-full px-6 py-3 bg-gray-900 text-white rounded-md hover:bg-gray-800 focus:outline-none focus:ring-2 focus:ring-gray-500 focus:ring-offset-2 transition-colors"
+              disabled={isSubmitting}
+              className="w-full px-6 py-3 bg-gray-900 text-white rounded-md hover:bg-gray-800 focus:outline-none focus:ring-2 focus:ring-gray-500 focus:ring-offset-2 transition-colors disabled:bg-gray-400"
             >
-              Send Message
+              {isSubmitting ? 'Sending...' : 'Send Message'}
             </button>
           </div>
         </form>

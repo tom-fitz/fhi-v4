@@ -5,9 +5,9 @@ const Footer = () => {
         <div className="grid md:grid-cols-3 gap-8">
           <div>
             <h3 className="text-xl font-light mb-4">Contact</h3>
-            <p className="mb-2">123 Main Street</p>
-            <p className="mb-2">Boston, MA 02108</p>
-            <p className="mb-2">(555) 123-4567</p>
+            <p className="mb-2">30 Rosemary Street</p>
+            <p className="mb-2">Needham, MA 02494</p>
+            <p className="mb-2">(617) 738-1000</p>
             <p>info@fitzgeraldhomeinteriors.com</p>
           </div>
           
