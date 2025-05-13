@@ -19,10 +19,6 @@ const nextConfig = {
       },
     ],
   },
-  ...(process.env.NODE_ENV === 'production' ? {
-    basePath: '/fhi-v4',
-    assetPrefix: '/fhi-v4/',
-  } : {}),
   async headers() {
     return [
       {
