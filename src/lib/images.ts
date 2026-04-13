@@ -32,8 +32,18 @@ export const getVideoUrl = async (videoName: string): Promise<string> => {
 // Gallery images are in the gallery subdirectory
 export const galleryImages = [
   'gallery1.jpeg',
-  'gallery3.jpg'
-];
+  'gallery3.jpg',
+  'gallery_04.jpg',
+  'gallery_05.jpg',
+  'gallery_06.jpg',
+  'gallery_07.jpg',
+  'gallery_08.jpg',
+  'gallery_09.jpg',
+  'gallery_10.jpg',
+  'gallery_11.jpg',
+  'gallery_12.jpg',
+  'gallery_13.jpg',
+];  
 
 // Other images are in the root images directory
 export const logoImage = 'logo_white.png';
