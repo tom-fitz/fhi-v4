@@ -21,8 +21,6 @@ const firebaseConfig = {
   databaseURL: process.env.NEXT_PUBLIC_FIREBASE_DATABASE_URL || "https://fhi-v4-default-rtdb.firebaseio.com/",
 };
 
-console.log("firebaseConfig", firebaseConfig)
-
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
 const storage = getStorage(app);
