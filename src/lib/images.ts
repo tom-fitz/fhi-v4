@@ -43,6 +43,13 @@ export const galleryImages = [
   'gallery_11.jpg',
   'gallery_12.jpg',
   'gallery_13.jpg',
+  'gallery_14.jpg',
+  'gallery_15.jpg',
+  'gallery_16.jpg',
+  'gallery_17.jpg',
+  'gallery_18.jpg',
+  'gallery_19.jpg',
+  'gallery_20.jpg',
 ];  
 
 // Other images are in the root images directory
